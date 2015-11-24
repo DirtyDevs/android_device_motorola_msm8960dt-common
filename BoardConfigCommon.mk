@@ -115,7 +115,7 @@ RECOVERY_SDCARD_ON_DATA := true
 HAVE_SELINUX := true
 
 # SELinux
--include device/qcom/sepolicy/sepolicy.mk
+#-include device/qcom/sepolicy/sepolicy.mk
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
