@@ -244,37 +244,6 @@ struct fs_path_config {
     const char *prefix;
 };
 
-static inline void fs_config(const char *path, int dir,
-                             unsigned *uid, unsigned *gid, unsigned *mode, uint64_t *capabilities)
-{
-    const struct fs_path_config *pc;
-    int plen;
-
-    if (path[0] == '/') {
-        path++;
-    }
-
-    pc = dir ? android_dirs : android_files;
-    plen = strlen(path);
-    for(; pc->prefix; pc++){
-        int len = strlen(pc->prefix);
-        if (dir) {
-            if(plen < len) continue;
-            if(!strncmp(pc->prefix, path, len)) break;
-            continue;
-        }
-        /* If name ends in * then allow partial matches. */
-        if (pc->prefix[len -1] == '*') {
-            if(!strncmp(pc->prefix, path, len - 1)) break;
-        } else if (plen == len){
-            if(!strncmp(pc->prefix, path, len)) break;
-        }
-    }
-    *uid = pc->uid;
-    *gid = pc->gid;
-    *mode = (*mode & (~07777)) | pc->mode;
-    *capabilities = pc->capabilities;
-
 #if 0
     fprintf(stderr,"< '%s' '%s' %d %d %o >\n",
             path, pc->prefix ? pc->prefix : "", *uid, *gid, *mode);
