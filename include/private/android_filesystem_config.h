@@ -248,6 +248,5 @@ struct fs_path_config {
     fprintf(stderr,"< '%s' '%s' %d %d %o >\n",
             path, pc->prefix ? pc->prefix : "", *uid, *gid, *mode);
 #endif
-}
 #endif
 #endif
